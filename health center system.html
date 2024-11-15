@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango Health Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #001f3f; /* Navy blue */
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        header img {
+            max-width: 150px;
+            margin-right: 15px; /* Space between logo and title */
+        }
+        header h1 {
+            font-size: 2.5em; /* Increase the font size */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #001f3f; /* Navy blue */
+        }
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #003366; /* Darker navy blue */
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+        }
+        .button {
+            background-color: #001f3f; /* Navy blue */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #003366; /* Darker navy blue */
+        }
+        input[type="text"], input[type="password"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .service-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .service-card {
+            flex: 1 1 calc(33.333% - 20px); /* Three cards per row */
+            margin: 10px; /* Margin for spacing between cards */
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box; /* Ensure padding does not affect width */
+        }
+        .details {
+            display: none;
+            margin-top: 10px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .service-card {
+                flex: 1 1 100%; /* Stack cards on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="C:\Users\pc\Downloads\HOSI.png" alt="Mango Health Center Logo">
+    <h1>MANGO HEALTH CENTER</h1>
+</header>
+
+<nav>
+    <a href="#home" onclick="showSection('home')">Home</a>
+    <a href="#about" onclick="showSection('about')">About Us</a>
+    <a href="#services" onclick="showSection('services')">Outpatient Services</a>
+    <a href="#contact" onclick="showSection('contact')">Contact</a>
+    <a href="#emergency" onclick="showSection('emergency')">Emergency Contacts</a>
+</nav>
+
+<div class="container">
+
+    <div id="home" class="card">
+        <h2>Welcome to Mango Health Center</h2>
+        <p>Your health is our priority. Please log in or create an account to access our services.</p>
+        
+        <h3>Login</h3>
+        <input type="text" placeholder="Username" id="loginUsername">
+        <input type="password" placeholder="Password" id="loginPassword">
+        <button class="button" onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#register" onclick="showSection('register')">Register here</a></p>
+    </div>
+
+    <div id="about" class="card hidden">
+        <h2>About Us</h2>
+        <img src="image-url-1.jpg" alt="Mango Health Center" style="width:100%; border-radius: 5px; margin-bottom: 15px;">
+        <p>Mango Health Center is a leading medical service provider in Kenya, with a vast network of Outpatient Centres across the country and growing.</p>
+        
+        <img src="image-url-2.jpg" alt="Medical Team" style="width:100%; border-radius: 5px; margin-bottom: 15px;">
+        <p>We take pride in our experienced medical and management teams, backed by internationally approved disease management protocols and cutting-edge information technology systems. This ensures consistent treatment outcomes for our clients, setting us apart from other providers in the region.</p>
+        
+        <img src="image-url-3.jpg" alt="Patient Care" style="width:100%; border-radius: 5px; margin-bottom: 15px;">
+        <p>Our comprehensive value chain, strong focus on clinical risk management, and emphasis on preventive care make us stand out. We are dedicated to delivering quality, affordable care sustainably to all our valued clients.</p>
+        
+        <p>Trust in Mango Health for compassionate and exceptional outpatient healthcare services. Your well-being is our priority, and we are committed to providing you with the best possible care. Welcome to a healthier tomorrow with us.</p>
+        
+        <h3>Excellence in Patient Care</h3>
+        <h4>Our History, Mission, & Vision</h4>
+        <p>Established in 1984, Mango Health has a long, robust history. Originally focused on accident and medical evacuation by road and air, we have since expanded to offer a diverse portfolio of services. Throughout our evolution, we have always retained our values of quality, innovation, and excellence.</p>
+        
+        <h4>Our Mission</h4>
+        <p>We provide healthcare solutions that make a difference to life.</p>
+        
+        <h4>Our Vision</h4>
+        <p>To be the provider of choice for innovative and quality healthcare solutions in Kenya.</p>
+    </div>
+     
+    <div id="services" class="card hidden">
+        <h2>Outpatient Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <h3>Ophthalmology Services</h3>
+                <p>AAR Healthcare has partnered with Mamy Eyewear to provide more than just eyeglasses; we now offer a unique experience that marries fashion with functionality.</p>
+                <button class="button" onclick="toggleDetails('ophthalmologyDetails')">Learn More</button>
+                <div id="ophthalmologyDetails" class="details">
+                    <p>Details about Ophthalmology Services...</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Obstetrics & Gynaecology Clinic</h3>
+                <p>At AAR Healthcare, we recognize the unique healthcare needs of women, and our Obstetrics and Gynecology Clinic is dedicated to providing comprehensive and compassionate care.</p>
+                <button class="button" onclick="toggleDetails('obgynDetails')">Learn More</button>
+                <div id="obgynDetails" class="details">
+                    <p>Details about Obstetrics & Gynaecology Clinic...</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Pediatric Clinic</h3>
+                <p>At AAR Healthcare, we understand that children require specialized care and attention.</p>
+                <button class="button" onclick="toggleDetails('pediatricDetails')">Learn More</button>
+                <div id="pediatricDetails" class="details">
+                    <p>Details about Pediatric Clinic...</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>General Practitioner Clinic</h3>
+                <p>At AAR Healthcare, we understand that your well-being is your most precious asset.</p>
+                <button class="button" onclick="toggleDetails('gpDetails')">Learn More</button>
+                <div id="gpDetails" class="details">
+                    <p>Details about General Practitioner Clinic...</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Dental Services</h3>
+                <p>Our dedicated dental services blend expertise and innovation to create a dazzling smile you'll love.</p>
+                <button class="button" onclick="toggleDetails('dentalDetails')">Learn More</button>
+                <div id="dentalDetails" class="details">
+                    <p>Details about Dental Services...</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Wellness Program</h3>
+                <p>We offer a wider range of Wellness Programs - your personalized path to health, safety, and well-being.</p>
+                <button class="button" onclick="toggleDetails('wellnessDetails')">Learn More</button>
+                <div id="wellnessDetails" class="details">
+                    <p>Details about Wellness Program...</p>
+                </div>
+            </div>
+            <!-- Add more service cards here if needed -->
+        </div>
+    </div>
+    
+    <div id="contact" class="card hidden">
+        <h2>Contact Us</h2>
+        <h3>Mango Health Head Office</h3>
+        <p><strong>Phone Number:</strong></p>
+        <p>+254 709 701000 | +254 730 655000</p>
+        
+        <p><strong>Email Address:</strong></p>
+        <p>clientservice@mangohealth.com</p>
+        
+        <p><strong>Location:</strong></p>
+        <p>Williamson House, 4th Ngong Avenue, 5th Floor</p>
+    
+        <h3>AAR Rescue Services</h3>
+        <p><strong>Emergency Numbers:</strong></p>
+        <p>+254 725 225 225 | +254 34 225 225</p>
+    
+        <h3>Send Us a Message</h3>
+        <form>
+            <label for="names">Names:</label>
+            <input type="text" id="names" placeholder="Your Name" required>
+    
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" placeholder="Your Email" required>
+    
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" placeholder="Your Phone Number" required>
+    
+            <label for="region">Select Region of Residence:</label>
+            <select id="region" required>
+                <option value="">Select...</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="central">Central</option>
+                <option value="coast">Coast</option>
+                <option value="western">Western</option>
+                <option value="eastern">Eastern</option>
+                <option value="northern">Northern</option>
+            </select>
+    
+            <label for="service">Select Service Type:</label>
+            <select id="service" required>
+                <option value="">Select...</option>
+                <option value="general">General Consultation</option>
+                <option value="emergency">Emergency Services</option>
+                <option value="pediatrics">Pediatrics</option>
+                <option value="gynecology">Gynecology</option>
+            </select>
+    
+            <label>
+                <input type="checkbox" required> Please confirm you have read our Data and Privacy Policy and Cookies Policy
+            </label>
+    
+            <button type="submit" class="button">Send Your Enquiry</button>
+        </form>
+    
+        <p>Kindly note that all personal, sensitive, and health data collected shall be processed in accordance with the Data Privacy Act No 24 of 2019. For more information on your rights and responsibilities, please check our data privacy policy <a href="#privacy-policy">here</a>.</p>
+    
+        <h3>Location Map</h3>
+        <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8094867663876!2d36.82519917436121!3d-1.2884868356272605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1127b2e798bd%3A0x56641eb1d7a2b0e1!2sSt.%20Paul&#39;s%20University%20-%20Nairobi%20Campus!5e0!3m2!1sen!2ske!4v1731409257888!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+            width="100%" 
+            height="300" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+    
+    <div id="emergency" class="card hidden">
+        <h2>Emergency Contacts</h2>
+        <p>For emergencies, please contact:</p>
+        <p>Emergency Services: 911</p>
+        <p>Mango Health Center: (123) 456-7890</p>
+    </div>
+
+    <div id="register" class="card hidden">
+        <h2>Register</h2>
+        <input type="text" placeholder="Username" id="registerUsername">
+        <input type="password" placeholder="Password" id="registerPassword">
+        <button class="button" onclick="register()">Register</button>
+        <p>Already have an account? <a href="#home" onclick="showSection('home')">Login here</a></p>
+    </div>
+
+    <div id="dashboard" class="card hidden">
+        <h2>Dashboard</h2>
+        <h3>Welcome, <span id="currentUser"></span>!</h3>
+        <button class="button" onclick="alert('Go to patient registration')">Register New Patient</button>
+        <button class="button" onclick="alert('Go to patient deregistration')">Deregister Patient</button>
+        <button class="button" onclick="alert('Go to appointment booking')">Book Appointment</button>
+        <button class="button" onclick="alert('View prescriptions')">View Prescriptions</button>
+        <button class="button" onclick="alert('View appointment history')">View Appointment History</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2024 Mango Health Center. All rights reserved.</p>
+</footer>
+
+<script>
+    let currentUser = null;
+
+    function showSection(section) {
+        const sections = ['home', 'about', 'services', 'contact', 'emergency', 'register', 'dashboard'];
+        sections.forEach(sec => {
+            document.getElementById(sec).classList.add('hidden');
+        });
+        document.getElementById(section).classList.remove('hidden');
+        
+        if (section === 'dashboard' && currentUser) {
+            document.getElementById('currentUser').innerText = currentUser;
+        }
+    }
+
+    function login() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+
+        if (username && password) {
+            currentUser = username;
+            alert(`Welcome, ${currentUser}!`);
+            showSection('dashboard');
+        } else {
+            alert('Please enter valid credentials.');
+        }
+    }
+
+    function register() {
+        const username = document.getElementById('registerUsername').value;
+        const password = document.getElementById('registerPassword').value;
+
+        if (username && password) {
+            alert(`Account created for ${username}! You can now log in.`);
+            showSection('home');
+        } else {
+            alert('Please fill in all fields.');
+        }
+    }
+
+    function toggleDetails(detailId) {
+        const details = document.getElementById(detailId);
+        details.classList.toggle('hidden');
+    }
+
+    showSection('home');
+</script>
+
+</body>
+</html>
