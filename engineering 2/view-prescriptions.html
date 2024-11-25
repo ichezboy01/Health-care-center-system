@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Prescriptions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        h2 {
+            color: #001f3f;
+        }
+        .prescription-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .prescription-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 220px;
+        }
+        .button {
+            background-color: #001f3f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #003366;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        input[type="text"], input[type="number"], input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: green;
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Your Prescriptions</h2>
+
+<div id="prescriptionForm">
+    <h3>Add New Prescription</h3>
+    <div class="form-group">
+        <label for="medicationName">Medication Name:</label>
+        <input type="text" id="medicationName" placeholder="Enter medication name" required>
+    </div>
+    <div class="form-group">
+        <label for="dosage">Dosage:</label>
+        <input type="text" id="dosage" placeholder="Enter dosage (e.g., 500mg)" required>
+    </div>
+    <div class="form-group">
+        <label for="frequency">Frequency:</label>
+        <input type="number" id="frequency" placeholder="Enter frequency (times per day)" required>
+    </div>
+    <div class="form-group">
+        <label for="days">Duration (Days):</label>
+        <input type="number" id="days" placeholder="Enter number of days" required>
+    </div>
+    <button class="button" onclick="addPrescription()">Add Prescription</button>
+</div>
+
+<div class="prescription-list" id="prescriptionList">
+    <!-- Prescription cards will be added here dynamically -->
+</div>
+
+<script>
+    const prescriptions = [];
+
+    function addPrescription() {
+        const name = document.getElementById('medicationName').value;
+        const dosage = document.getElementById('dosage').value;
+        const frequency = parseInt(document.getElementById('frequency').value);
+        const days = parseInt(document.getElementById('days').value);
+
+        const prescription = {
+            id: prescriptions.length,
+            name,
+            dosage,
+            frequency,
+            days,
+            takenDays: 0, // Initialize taken days to 0
+        };
+
+        prescriptions.push(prescription);
+        displayPrescriptions();
+        clearForm();
+    }
+
+    function displayPrescriptions() {
+        const prescriptionList = document.getElementById('prescriptionList');
+        prescriptionList.innerHTML = '';
+
+        prescriptions.forEach(prescription => {
+            const card = document.createElement('div');
+            card.className = 'prescription-card';
+            card.innerHTML = `
+                <h4>${prescription.name}</h4>
+                <p>Dosage: ${prescription.dosage}</p>
+                <p>Frequency: ${prescription.frequency} times/day</p>
+                <p>Duration: ${prescription.days} days</p>
+                <button class="button" onclick="markAsTaken(${prescription.id})">Mark as Taken</button>
+                <div class="progress-bar">
+                    <div class="progress" style="width: ${calculateProgress(prescription)};"></div>
+                </div>
+                <button class="button" onclick="removePrescription(${prescription.id})">Remove</button>
+            `;
+            prescriptionList.appendChild(card);
+        });
+    }
+
+    function calculateProgress(prescription) {
+        const totalDoses = prescription.days * prescription.frequency;
+        return totalDoses > 0 ? (prescription.takenDays / totalDoses) * 100 + '%' : '0%';
+    }
+
+    function markAsTaken(id) {
+        const prescription = prescriptions.find(p => p.id === id);
+        if (prescription) {
+            prescription.takenDays++;
+            displayPrescriptions(); // Update the display in real-time
+        }
+    }
+
+    function removePrescription(id) {
+        const index = prescriptions.findIndex(p => p.id === id);
+        if (index > -1) {
+            prescriptions.splice(index, 1);
+        }
+        displayPrescriptions();
+    }
+
+    function clearForm() {
+        document.getElementById('medicationName').value = '';
+        document.getElementById('dosage').value = '';
+        document.getElementById('frequency').value = '';
+        document.getElementById('days').value = '';
+    }
+</script>
+
+</body>
+</html>

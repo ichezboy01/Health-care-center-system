@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .faq-item {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .faq-question {
+            cursor: pointer;
+            margin: 0;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+        }
+        .chat-container {
+            margin-top: 30px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .chat-box {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #fafafa;
+        }
+        .user-input {
+            display: flex;
+        }
+        .user-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .user-input button {
+            padding: 10px;
+            border: none;
+            background: #004080;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .user-input button:hover {
+            background: #003366;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Frequently Asked Questions</h1>
+
+<div class="faq-item">
+    <h2 class="faq-question">What services do you offer?</h2>
+    <p class="faq-answer">We offer a range of services including emergency care, outpatient services, and specialized treatments.</p>
+</div>
+<div class="faq-item">
+    <h2 class="faq-question">How can I book an appointment?</h2>
+    <p class="faq-answer">You can book an appointment online through our booking system or by calling our office.</p>
+</div>
+<div class="faq-item">
+    <h2 class="faq-question">What should I bring to my appointment?</h2>
+    <p class="faq-answer">Please bring your ID, insurance information, and any relevant medical records.</p>
+</div>
+<div class="faq-item">
+    <h2 class="faq-question">Do you accept walk-in patients?</h2>
+    <p class="faq-answer">Yes, we accept walk-in patients, but we recommend scheduling an appointment for prompt service.</p>
+</div>
+
+<div class="chat-container">
+    <h2>Ask our AI Receptionist</h2>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="user-input">
+        <input type="text" id="user-input" placeholder="Ask your question...">
+        <button id="send-btn">Send</button>
+    </div>
+</div>
+
+<script>
+    const questions = document.querySelectorAll('.faq-question');
+    questions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+
+    const chatBox = document.getElementById('chat-box');
+    const sendBtn = document.getElementById('send-btn');
+    const userInput = document.getElementById('user-input');
+
+    // Predefined responses
+    const responses = {
+        "What services do you offer?": "We offer a range of services including emergency care, outpatient services, and specialized treatments.",
+        "How can I book an appointment?": "You can book an appointment online through our booking system or by calling our office.",
+        "What should I bring to my appointment?": "Please bring your ID, insurance information, and any relevant medical records.",
+        "Do you accept walk-in patients?": "Yes, we accept walk-in patients, but we recommend scheduling an appointment for prompt service.",
+        "What are your opening hours?": "We are open from 8 AM to 8 PM, Monday to Saturday.",
+        "How can I contact customer service?": "You can contact customer service at +254 719073000 or email us at info@hospital.com.",
+        "Where are you located?": "We are located at 123 Health St, Nairobi, Kenya.",
+        "What insurance providers do you accept?": "We accept various insurance providers, including NHIF and private insurance. Please contact our office for more details.",
+        "What should I do in case of an emergency?": "In case of an emergency, please call our emergency hotline or visit our emergency department immediately.",
+        "Can I change my appointment date?": "Yes, you can change your appointment date by contacting our office or using our online booking system.",
+        "Do you have a pharmacy on-site?": "Yes, we have a fully stocked pharmacy on-site for your convenience."
+    };
+
+    sendBtn.addEventListener('click', () => {
+        const userQuestion = userInput.value.trim();
+        if (userQuestion) {
+            displayMessage(userQuestion, 'user');
+            const answer = getAnswer(userQuestion);
+            displayMessage(answer, 'ai');
+            userInput.value = '';
+        }
+    });
+
+    function displayMessage(message, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.textContent = message;
+        msgDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
+        chatBox.appendChild(msgDiv);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    }
+
+    function getAnswer(question) {
+        // Normalize the question for easier matching
+        const normalizedQuestion = question.toLowerCase().trim();
+        for (const key in responses) {
+            if (key.toLowerCase() === normalizedQuestion) {
+                return responses[key];
+            }
+        }
+        return "I'm sorry, I don't have an answer for that. Please check our FAQs.";
+    }
+</script>
+
+</body>
+</html>

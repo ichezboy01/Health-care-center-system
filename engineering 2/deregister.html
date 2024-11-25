@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deregister Patient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        h2 {
+            color: #001f3f;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            background-color: #001f3f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #003366;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Deregister Patient</h2>
+<p>Please enter the Patient Number and Full Name of the patient you wish to deregister.</p>
+
+<div id="deregistrationForm">
+    <div class="form-group">
+        <label for="patientNumber">Patient Number:</label>
+        <input type="text" id="patientNumber" placeholder="Enter patient number" required>
+    </div>
+    <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" placeholder="Enter full name" required>
+    </div>
+    <button class="button" onclick="deregisterPatient()">Deregister Patient</button>
+    <button class="button" onclick="goToRegister()">Register New Patient</button>
+</div>
+
+<script>
+    const patients = JSON.parse(localStorage.getItem('patients')) || [];
+
+    function deregisterPatient() {
+        const patientNumber = document.getElementById('patientNumber').value;
+        const fullName = document.getElementById('fullName').value;
+
+        const index = patients.findIndex(p => p.id === patientNumber && p.fullName === fullName);
+
+        if (index > -1) {
+            patients.splice(index, 1);
+            localStorage.setItem('patients', JSON.stringify(patients));
+            alert(`Patient ${fullName} deregistered successfully.`);
+            clearForm();
+        } else {
+            alert('Patient not found. Please check the details.');
+        }
+    }
+
+    function clearForm() {
+        document.getElementById('patientNumber').value = '';
+        document.getElementById('fullName').value = '';
+    }
+
+    function goToRegister() {
+        window.location.href = 'register-patient.html'; // Ensure this matches the filename exactly
+    }
+</script>
+
+</body>
+</html>

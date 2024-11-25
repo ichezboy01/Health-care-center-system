@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        h2 {
+            color: #001f3f;
+        }
+        .appointment-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .appointment-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 220px;
+        }
+        .button {
+            background-color: #001f3f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #003366;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Your Appointments</h2>
+
+<div class="form-group">
+    <label for="patientNumber">Enter Patient Number to Mark Attendance:</label>
+    <input type="text" id="patientNumber" placeholder="Enter patient number">
+    <button class="button" onclick="markAttendance()">Mark as Attended</button>
+    <button class="button" onclick="goToBookAppointments()">Book New Appointment</button>
+</div>
+
+<div class="appointment-list" id="appointmentList">
+    <!-- Appointment cards will be added here dynamically -->
+</div>
+
+<script>
+    let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+    function displayAppointments() {
+        const appointmentList = document.getElementById('appointmentList');
+        appointmentList.innerHTML = '';
+
+        appointments.forEach(appointment => {
+            const card = document.createElement('div');
+            card.className = 'appointment-card';
+            card.innerHTML = `
+                <h4>Patient Number: ${appointment.id}</h4>
+                <h4>${appointment.patientName}</h4>
+                <p>Date: ${appointment.appointmentDate}</p>
+                <p>Doctor: ${appointment.doctor}</p>
+                <p>Status: ${appointment.status}</p>
+            `;
+            appointmentList.appendChild(card);
+        });
+    }
+
+    function markAttendance() {
+        const patientNumber = parseInt(document.getElementById('patientNumber').value);
+        const appointment = appointments.find(a => a.id === patientNumber);
+
+        if (appointment) {
+            appointment.status = 'Attended';
+            alert(`Appointment ${patientNumber} marked as attended.`);
+            saveAppointments();
+            displayAppointments();
+        } else {
+            alert('Appointment not found.');
+        }
+    }
+
+    function saveAppointments() {
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+    }
+
+    function goToBookAppointments() {
+        window.location.href = 'book-appointments.html';
+    }
+
+    window.onload = displayAppointments;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Patient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        h2 {
+            color: #001f3f;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        input[type="text"], input[type="date"], select, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            background-color: #001f3f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #003366;
+        }
+        .profile-list {
+            margin-top: 20px;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Register Patient</h2>
+<p>You can register yourself or add family members as patients. If you are adding someone under 18, please provide the guardian's details.</p>
+
+<div id="registrationForm">
+    <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" placeholder="Enter full name" required>
+    </div>
+    <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+    </div>
+    <div class="form-group">
+        <label for="isMinor">Patient Type:</label>
+        <select id="isMinor" onchange="toggleGuardianFields()" required>
+            <option value="adult">Adult (18+)</option>
+            <option value="minor">Minor (under 18)</option>
+        </select>
+    </div>
+    <div id="guardianFields" style="display:none;">
+        <div class="form-group">
+            <label for="guardianName">Guardian's Full Name:</label>
+            <input type="text" id="guardianName" placeholder="Enter guardian's name">
+        </div>
+        <div class="form-group">
+            <label for="guardianPhone">Guardian's Phone:</label>
+            <input type="text" id="guardianPhone" placeholder="Enter guardian's phone number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="passportPhoto">Upload Passport Photo:</label>
+        <input type="file" id="passportPhoto" accept="image/*" required>
+    </div>
+    <button class="button" onclick="registerPatient()">Register Patient</button>
+    <button class="button" onclick="goToDeregister()">Deregister Patient</button>
+</div>
+
+<div class="profile-list" id="profileList">
+    <h3>Registered Patients:</h3>
+    <!-- Patient profiles will be added here dynamically -->
+</div>
+
+<script>
+    const patients = JSON.parse(localStorage.getItem('patients')) || [];
+
+    function toggleGuardianFields() {
+        const isMinor = document.getElementById('isMinor').value === 'minor';
+        document.getElementById('guardianFields').style.display = isMinor ? 'block' : 'none';
+    }
+
+    function registerPatient() {
+        const fullName = document.getElementById('fullName').value;
+        const dob = document.getElementById('dob').value;
+        const isMinor = document.getElementById('isMinor').value === 'minor';
+        const guardianName = isMinor ? document.getElementById('guardianName').value : '';
+        const guardianPhone = isMinor ? document.getElementById('guardianPhone').value : '';
+        const passportPhoto = document.getElementById('passportPhoto').files[0];
+
+        if (!passportPhoto) {
+            alert("Please upload a passport photo.");
+            return;
+        }
+
+        const patientID = `BOBITNRB${String(patients.length + 1).padStart(4, '0')}`;
+        const patient = {
+            id: patientID,
+            fullName,
+            dob,
+            isMinor,
+            guardianName,
+            guardianPhone,
+            passportPhoto: URL.createObjectURL(passportPhoto) // Create a URL for the photo
+        };
+
+        patients.push(patient);
+        localStorage.setItem('patients', JSON.stringify(patients));
+        alert(`Patient registered successfully! Patient Number: ${patientID}`);
+        clearForm();
+        displayPatients();
+    }
+
+    function clearForm() {
+        document.getElementById('fullName').value = '';
+        document.getElementById('dob').value = '';
+        document.getElementById('isMinor').value = 'adult';
+        document.getElementById('guardianFields').style.display = 'none';
+        document.getElementById('guardianName').value = '';
+        document.getElementById('guardianPhone').value = '';
+        document.getElementById('passportPhoto').value = '';
+    }
+
+    function displayPatients() {
+        const profileList = document.getElementById('profileList');
+        profileList.innerHTML = '';
+
+        patients.forEach(patient => {
+            const card = document.createElement('div');
+            card.className = 'profile-card';
+            card.innerHTML = `
+                <img src="${patient.passportPhoto}" alt="Passport Photo">
+                <h4>${patient.fullName}</h4>
+                <p>Patient Number: ${patient.id}</p>
+                <p>Date of Birth: ${patient.dob}</p>
+                ${patient.isMinor ? `<p>Guardian: ${patient.guardianName}</p>` : ''}
+            `;
+            profileList.appendChild(card);
+        });
+    }
+
+    function goToDeregister() {
+        window.location.href = 'deregister.html'; // Ensure this matches the filename exactly
+    }
+
+    window.onload = displayPatients;
+</script>
+
+</body>
+</html>

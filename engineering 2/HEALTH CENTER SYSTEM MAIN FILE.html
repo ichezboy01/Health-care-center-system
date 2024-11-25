@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANGO HEALTHCARE CENTER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #004080;
+            color: white;
+            padding: 10px 20px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 5px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        nav a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: white;
+            width: 0;
+            transition: width 0.3s;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        .contact-info {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        .hero img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero img.active {
+            opacity: 1;
+        }
+        .content {
+            padding: 20px;
+        }
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .stat-card {
+            text-align: center;
+            flex: 1;
+            padding: 15px;
+            border-radius: 5px;
+            background: #e7f3fe;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 0 10px;
+        }
+        .dashboard, .about, .contact-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .dashboard h3, .services h3, .contact-section h3 {
+            margin-bottom: 10px;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card-item {
+            flex: 1 1 calc(50% - 20px); /* Two cards per row */
+            margin: 10px;
+            min-width: 220px; /* Ensure a minimum width for smaller screens */
+        }
+        .service-card {
+            background: #e7f3fe;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: left;
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+        .service-card img {
+            width: 100px; /* Fixed width */
+            height: 100px; /* Fixed height */
+            border-radius: 10px; /* Rounded corners */
+            object-fit: cover; /* Ensures the image covers the area */
+            margin-bottom: 10px; /* Spacing below the image */
+        }
+        footer {
+            background: #004080;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            .statistics {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card-item {
+                flex: 1 1 100%; /* Stack cards on small screens */
+            }
+        }
+        .contact-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .contact-item {
+            flex: 1 1 30%; /* Adjusts based on screen size */
+            margin: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .contact-item .icon {
+            margin-right: 10px;
+            font-size: 24px; /* Adjust icon size */
+            color: #004080; /* Icon color */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <nav>
+            <a href="about.html">About Us</a>
+            <a href="management.html">Management</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="research.html">Research</a>
+        </nav>
+    </div>
+    <div class="contact-info">
+        <span><i class="fas fa-phone"></i> +254 742348821</span>
+        <span><i class="fas fa-envelope"></i> <a href="mailto:melvingitau254@gmail.com" style="color: white;">info@hospital.com</a></span>
+    </div>
+</header>
+
+<div class="hero">
+    <img src="DALL·E 2024-11-25 14.41.25 - A modern hospital building with a clean, professional facade, set in a slightly blurred background to create a soft focus effect. The name 'MANGO HEAL.webp" alt="Chapel" class="active">
+    <img src="picc.jpg" alt="Emergency Room">
+    <img src="hospital.jpeg" alt="Pharmacy">
+    <img src="pi.jpg" alt="Patient Care">
+    <img src="hospital.jpeg" alt="Nursing Staff">
+</div>
+
+<div class="content">
+    <h2>We Are Always Ready to Help You & Your Family</h2>
+    <p>Welcome to the Hospital! Your health is our priority. Explore our services and get the care you need.</p>
+
+    <div class="statistics">
+        <div class="stat-card">
+            <img src="room.png" alt="Rooms Icon" width="50"><br>
+            <strong>176</strong><br>Hospital Rooms
+        </div>
+        <div class="stat-card">
+            <img src="doctors-removebg-preview.png" alt="Doctors Icon" width="50"><br>
+            <strong>Many</strong><br>Specialist Doctors
+        </div>
+        <div class="stat-card">
+            <img src="patient.png" alt="Patients Icon" width="50"><br>
+            <strong>Many</strong><br>Happy Patients
+        </div>
+        <div class="stat-card">
+            <img src="HOSI.png" alt="Years Icon" width="50"><br>
+            <strong>60</strong><br>Years of Service
+        </div>
+    </div>
+
+    <div class="about">
+        <h3>About Us</h3>
+        <p>MANGO Healthcare center and Hospital is committed to being a leading healthcare provider in East and Central Africa, providing innovative and quality healthcare solutions to our clients with our wide variety of services offered at our various facilities across the country.</p>
+        <h4>Our Mission</h4>
+        <p>To provide healthcare solutions that make a difference in people's lives.</p>
+        <h4>Our Vision</h4>
+        <p>To be the provider of choice for healthcare solutions in Kenya.</p>
+    </div>
+
+    <div class="dashboard">
+        <h3>Patient Management Dashboard</h3>
+        <div class="card-container">
+            <div class="card-item">
+                <div class="service-card">
+                    <h4><a href="register.html">Patient Registration</a></h4>
+                    <p>Register as a new patient quickly and easily.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <h4><a href="deregister.html">Patient De-Registration</a></h4>
+                    <p>Manage your patient status with ease.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <h4><a href="view-prescriptions.html">Prescription Management</a></h4>
+                    <p>Manage and view your prescriptions online.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <h4><a href="book-appointment.html">Book Appointments</a></h4>
+                    <p>Schedule and view your appointments with specialists.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="services">
+        <h3>Our Healthcare Services</h3>
+        <div class="card-container">
+            <div class="card-item">
+                <div class="service-card">
+                    <img src="dental.jpeg" alt="Dental Services">
+                    <h4>Dental Services</h4>
+                    <p>Comprehensive dental care for all ages.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <img src="orthopedics.jpg" alt="Orthopedic Services">
+                    <h4>Orthopedic Services</h4>
+                    <p>Expert care for bones and joints.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <img src="pediatric.png" alt="Pediatric Services">
+                    <h4>Pediatric Services</h4>
+                    <p>Specialized care for children.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <img src="cardiologi.jpg" alt="Cardiology Services">
+                    <h4>Cardiology Services</h4>
+                    <p>Comprehensive heart care and treatment.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <img src="gynecological-surgery-services.jpg" alt="Gynecology Services">
+                    <h4>Gynecology Services</h4>
+                    <p>Comprehensive care for women's health.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="service-card">
+                    <img src="physiotherapy-services-propel-physiotherapy.webp" alt="Physiotherapy Services">
+                    <h4>Physiotherapy Services</h4>
+                    <p>Rehabilitation and physical therapy services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-section">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt icon"></i>
+                <h4>Location</h4>
+                <p>Mombasa, Bamburi mwisho opp Petro city old Malindi RD, Kenya</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone icon"></i>
+                <h4>Phone</h4>
+                <p>+254 742348821</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope icon"></i>
+                <h4>Email</h4>
+                <p><a href="mailto:melvingitau254@gmail.com">info@hospital.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <h3>Our Location</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4613777.471351204!2d85.88073055532801!3d30.353046195813118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39be1ec6808cffc1%3A0x48172cc9dd372cef!2sAnnapurna%20I!5e0!3m2!1sen!2ske!4v1732532892861!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="emergency-contacts">
+        <h3>Emergency Contacts</h3>
+        <p>For emergencies, please contact:</p>
+        <ul>
+            <li>Emergency Services: 911</li>
+            <li>Mango Health Center: (123) 456-7890</li>
+            <li>Hospital Emergency Department: +254 719073000</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <p>© 2024 MANGO HEALTH CARE CENTER | All Rights Reserved</p>
+
+</footer>
+
+<script>
+    const images = document.querySelectorAll('.hero img');
+    let current = 0;
+
+    function changeImage() {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+    }
+
+    setInterval(changeImage, 5000);
+</script>
+
+</body>
+</html>
